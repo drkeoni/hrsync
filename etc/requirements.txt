@@ -1,0 +1,6 @@
+ipython
+
+requests
+Flask
+Flask-OAuth
+peewee
