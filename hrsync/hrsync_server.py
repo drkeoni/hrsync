@@ -5,9 +5,10 @@ import logging
 
 from flask import Flask, render_template
 
-APP_ROOT = os.path.abspath(os.path.join('..',os.path.dirname(__name__)))
+APP_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__),'..'))
 CONFIG_PATH = os.path.join(APP_ROOT,'etc','config','config.py')
-DEFAULT_PORT = 80
+DEFAULT_PORT = 8000
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -20,7 +21,10 @@ def parse_args():
 
 def create_server():
     app = Flask(__name__)
-    app.config.from_pyfile(
+    app.config.from_pyfile(CONFIG_PATH)
+    return app
+
+app = create_server()
 
 
 @app.errorhandler(404)
@@ -42,8 +46,6 @@ def setup_logging():
     app.logger.addHandler(log_handler)
     app.logger.setLevel(logging.INFO)
 
-
-app = create_server()
 
 if __name__ == '__main__':
     args = parse_args()
