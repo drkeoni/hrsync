@@ -10,6 +10,10 @@ NOSE_OPTS:=--with-xunit --with-doctest --detailed-errors --xunit-file=tests/nose
 
 ACTIVATE:=${VE_DIR}/bin/activate
 
+SITE_DIR:=site
+SITE_THEME=Flex
+SITE_OUTPUT:=static
+
 _:=$(shell mkdir -p logs)
 
 help:
@@ -28,6 +32,10 @@ setup: logs/setup.log
 logs/setup.log: etc/requirements.txt
 	. ${ACTIVATE} && pip3 ${PIP_OPTS} install -r $(word 1,$^) 2>&1 | tee "$@.err"
 	/bin/mv "$@.err" "$@"
+
+build-site: FORCE
+	. ${ACTIVATE} && \
+	  pelican -d -s ${SITE_DIR}/pelicanconf.py -t ${SITE_DIR}/${SITE_THEME} -o ${SITE_OUTPUT} ${SITE_DIR}/content
 
 test: FORCE
 	( [[ -z "${DEPLOY_MODE}" ]] && echo "[ERROR] Missing DEPLOY_MODE, need to source environment first" ) || \

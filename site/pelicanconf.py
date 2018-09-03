@@ -4,7 +4,8 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Jon Sorenson'
 SITENAME = 'hrsync'
-SITEURL = 'http://hrsync.nasonstudios.net'
+# SITEURL = 'http://hrsync.nasonstudios.net'
+SITEURL = 'http://127.0.0.1'
 RELATIVE_URLS = False
 
 PATH = 'content'
