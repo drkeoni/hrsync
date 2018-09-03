@@ -5,3 +5,6 @@ Flask
 Flask-OAuth
 peewee
 gunicorn
+
+pelican
+Markdown

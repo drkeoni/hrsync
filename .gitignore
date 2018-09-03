@@ -1,5 +1,7 @@
 logs/
 ve/
+__pycache__/
+static/
 
 *.out
 .*.swp

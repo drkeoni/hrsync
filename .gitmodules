@@ -1,0 +1,3 @@
+[submodule "site/pelican-elegant"]
+	path = site/pelican-elegant
+	url = https://github.com/talha131/pelican-elegant.git
