@@ -5,3 +5,5 @@ static/
 
 *.out
 .*.swp
+
+.fitbit_auth.json
