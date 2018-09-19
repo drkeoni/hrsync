@@ -6,6 +6,8 @@ import logging
 import json
 
 from fitbit import Fitbit
+from oauthlib.oauth2.rfc6749.errors import TokenExpiredError
+from requests_oauthlib.oauth2_session import TokenUpdated
 
 LOG_FORMAT = "%(asctime)s %(filename)s [%(levelname)s] %(message)s"
 log = logging.getLogger(__file__)
@@ -21,7 +23,9 @@ AUTH_FILE = os.path.join(ROOT,'.fitbit_auth.json')
 def parse_args():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--period',default='1d',
-            help='Period of time for heart-rate data')
+                        help='Period of time for heart-rate data.  '
+                             'Examples: 1d, 1w, 30d, 6m'
+                       )
     args = parser.parse_args()
     return args
 
@@ -46,10 +50,18 @@ def run(args):
             access_token=auth_data['access_token'], refresh_token=auth_data['refresh_token'],
             expires_at=auth_data['expires_at'])
 
-    hr_data = fitbit_api.time_series('heart', period=args.period)
+    try:
+        hr_data = fitbit_api.time_series('heart', period=args.period)
+    except TokenExpiredError as e:
+        log.exception(e)
+        log.error('You need to reauthenticate with fitbit oauth')
+        return 1
+    except TokenUpdated as e:
+        log.exception(e)
+        log.error('You need to reauthenticate with fitbit oauth')
+        return 1
 
-    log.info(hr_data)
-
+    print(json.dumps(hr_data, indent=4))
 
     return 0
 
