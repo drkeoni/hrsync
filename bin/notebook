@@ -1,0 +1,4 @@
+#!/bin/bash
+ROOT=$(dirname $(dirname $(greadlink -f ${BASH_SOURCE[0]})))
+NB_DIR=${ROOT}/notebooks
+cd ${NB_DIR} && jupyter notebook &> jupyter.log &
