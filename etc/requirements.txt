@@ -1,11 +1,12 @@
 ipython
 
+jupyter
+numpy
+pandas
+seaborn
+
 /Users/jon/projects/python-fitbit
 requests
-Flask
-Flask-OAuth
-peewee
-gunicorn
 cherrypy
 
 pelican
