@@ -22,5 +22,9 @@ Source the environment and login:
 fitbit_login.py
 ```
 
+Download all heart-rate data starting from 02/14/2017:
+```
+fetch_hr_data.py --period max --start_date 2017-02-14 > 2017-02-14_2019_06_01.json
+```
 
 &#169; 2018, Jon Sorenson
