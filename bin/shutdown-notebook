@@ -1,0 +1,2 @@
+#!/bin/bash
+ps aux | grep jon | grep Python | grep jupyter-notebook | awk '{print $2}' | xargs kill -9

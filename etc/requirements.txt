@@ -1,4 +1,6 @@
 ipython
+black
+flake8
 
 jupyter
 numpy
